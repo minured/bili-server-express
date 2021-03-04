@@ -11,7 +11,7 @@ POST {{url}}/register
 {{json}}
 
 {
-    "username": "user3",
+    "username": "user1",
     "password": "123456"
 }
 
@@ -20,9 +20,33 @@ POST {{url}}/login
 {{json}}
 
 {
-    "username": "user3",
+    "username": "user1",
     "password": "123456"
 }
+
+### 用户列表
+GET {{url}}/users
+
+### 视频列表
+get {{url}}/video
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNDExOTQ5Y2Q0MTEwNDcyNDVkNzQzNiIsImlhdCI6MTYxNDg3OTIxNn0.So8QWVh3Nc6epmB_jBfqkQhFOZtLxSEoyx0HjRTNi_I
+
+### 添加视频
+post {{url}}/video
+{{json}}
+
+{
+    "id": "bv001",
+    "name": "原神攻略，12-3",
+    "introduction": "视频简介",
+    "category": "游戏"
+
+}
+
+
+
+
+
 
 
 

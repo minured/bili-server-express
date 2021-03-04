@@ -2,20 +2,11 @@ const express = require("express");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { UserAuth } = require("./model");
-const { PRIVATE_KEY } = require("./private");
-
-const port = 3456;
-const app = express();
-
-app.use(express.json());
-
-// TODO /api设置为通用路径
-app.get("/api", (req, res) => {
-  res.send("node server");
-});
+const { PRIVATE_KEY } = require("../private");
+const router = express.Router();
 
 // 注册
-app.post("/api/register", async (req, res) => {
+router.post("/api/register", async (req, res) => {
   let user = null;
   try {
     user = await UserAuth.create({
@@ -37,8 +28,8 @@ app.post("/api/register", async (req, res) => {
     },
   });
 });
-
-app.post("/api/login", async (req, res) => {
+// 登录
+router.post("/api/login", async (req, res) => {
   // 通过username从数据库找出信息
   const user = await UserAuth.findOne({
     username: req.body.username,
@@ -77,7 +68,10 @@ app.post("/api/login", async (req, res) => {
     token,
   });
 });
-
-app.listen(port, () => {
-  console.log(`server listen on http://localhost:${port}`);
+// 用户列表
+router.get("/api/users", async (req, res) => {
+  const users = await UserAuth.find();
+  res.send(users);
 });
+
+module.exports = router;
