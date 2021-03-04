@@ -1,0 +1,33 @@
+@url = http://localhost:3456/api 
+# @url = http://47.115.88.159:8080/api
+@json = Content-Type: application/json
+
+
+### 接口测试
+GET {{url}}
+
+### 注册
+POST {{url}}/register
+{{json}}
+
+{
+    "username": "user3",
+    "password": "123456"
+}
+
+### 登录
+POST {{url}}/login
+{{json}}
+
+{
+    "username": "user3",
+    "password": "123456"
+}
+
+
+
+
+
+
+
+
