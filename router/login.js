@@ -1,12 +1,13 @@
 const express = require("express");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { UserAuth } = require("./model");
+const { UserAuth, UserInfo } = require("./model");
 const { PRIVATE_KEY } = require("../private");
 const router = express.Router();
 
 // 注册
 router.post("/api/register", async (req, res) => {
+  // 写入用户账号密码
   let user = null;
   try {
     user = await UserAuth.create({
@@ -14,20 +15,42 @@ router.post("/api/register", async (req, res) => {
       password: req.body.password,
     });
   } catch (err) {
-    console.log("mongodb创建数据错误");
     res.send({
+      status: 400,
       message: "用户名已存在",
     });
     return;
   }
-  res.send({
-    message: "注册成功",
-    userAuth: {
-      username: user.username,
-      password: user.password,
+
+  // 生成token
+  const token = jwt.sign(
+    {
+      id: user._id,
     },
+    PRIVATE_KEY
+  );
+
+  // userInfo集合中 写入用户昵称
+  try {
+    userInfo = await UserInfo.create({
+      gender: 0,
+      username: user.username,
+      nickname: req.body.nickname,
+      userImg: null,
+      userDesc: null,
+    });
+  } catch {
+    console.log(req.body.nickname);
+  }
+
+  res.send({
+    status: 200,
+    message: "注册成功",
+    username: user.username,
+    token,
   });
 });
+
 // 登录
 router.post("/api/login", async (req, res) => {
   // 通过username从数据库找出信息

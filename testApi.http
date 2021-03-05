@@ -1,6 +1,8 @@
 @url = http://localhost:3456/api 
 # @url = http://47.115.88.159:8080/api
 @json = Content-Type: application/json
+@user1 = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNDFkMDFlMmJiYmM2MTY0ODBiZjI5YSIsImlhdCI6MTYxNDkyNTg5MH0.J4iBrlWCpj9NWdSq4-bczga8UzExKd9Y9q3k00Juev4
+@user2 = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNDFkMDJiMmJiYmM2MTY0ODBiZjI5YyIsImlhdCI6MTYxNDkzMDE1MH0.7UZY1ESD_TH81IgKJ0tUI7LbYqBNF8YpwmTZHZfdp8k
 
 
 ### 接口测试
@@ -11,8 +13,9 @@ POST {{url}}/register
 {{json}}
 
 {
-    "username": "user1",
-    "password": "123456"
+    "username": "user3",
+    "password": "123456",
+    "nickname": "我是璃月的厨师香菱"
 }
 
 ### 登录
@@ -20,7 +23,7 @@ POST {{url}}/login
 {{json}}
 
 {
-    "username": "user1",
+    "username": "user2",
     "password": "123456"
 }
 
@@ -29,8 +32,6 @@ GET {{url}}/users
 
 ### 视频列表
 get {{url}}/video
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNDExOTQ5Y2Q0MTEwNDcyNDVkNzQzNiIsImlhdCI6MTYxNDg3OTIxNn0.So8QWVh3Nc6epmB_jBfqkQhFOZtLxSEoyx0HjRTNi_I
-
 ### 添加视频
 post {{url}}/video
 {{json}}
@@ -40,8 +41,51 @@ post {{url}}/video
     "name": "原神攻略，12-3",
     "introduction": "视频简介",
     "category": "游戏"
-
 }
+
+### 用户信息
+get {{url}}/user
+{{user1}}
+
+
+### 更新用户信息1
+put {{url}}/user
+{{user2}}
+{{json}}
+
+{
+    "gender": 0,
+    "nickname": "我永远爱诺艾尔33333",
+    "userImg": "userimg1",
+    "userDesc": "个性签名"
+}
+
+### 收藏视频
+post {{url}}/video/like
+{{user2}}
+{{json}}
+
+{
+    "videoId": "bv003"
+}
+
+### 查询收藏状态
+get {{url}}/video/like
+{{user2}}
+{{json}}
+
+{
+    "videoId": "bv002"
+}
+
+### 上传
+post {{url}}/upload/multer
+
+
+
+
+
+
 
 
 
