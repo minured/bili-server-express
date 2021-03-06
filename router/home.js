@@ -1,24 +1,25 @@
 const express = require("express");
 const router = express.Router();
-
+const { Category, Video } = require("./model");
 
 // 获取目录
 router.get("/api/category", async (req, res) => {
-  
-  res.send("category");
+  const category = await Category.find();
+
+  res.send({
+    status: 200,
+    category,
+  });
 });
 
-// 添加视频
-router.post("/api/video", async (req, res) => {
-  console.log(req.body);
-  video = await Video.create({
-    id: req.body.id,
-    introduction: req.body.introduction,
+// 获取视频指定目录的视频列表
+router.get("/api/category/:categoryId", async (req, res) => {
+  const videos = await Video.find({
+    categoryId: req.params.categoryId,
   });
 
-  res.send(video);
+  res.send(videos);
 });
-
 
 
 module.exports = router;
