@@ -61,6 +61,7 @@ router.post("/api/login", async (req, res) => {
   // 用户存在判断
   if (!user) {
     return res.status(422).send({
+      status: 400,
       message: "用户不存在",
     });
   }
@@ -71,6 +72,7 @@ router.post("/api/login", async (req, res) => {
   );
   if (!isPasswordValid) {
     res.send({
+      status: 400,
       message: "密码错误",
     });
     return;
@@ -86,6 +88,7 @@ router.post("/api/login", async (req, res) => {
   console.log(token);
 
   res.send({
+    status: 200,
     message: "登陆成功",
     username: user.username,
     token,

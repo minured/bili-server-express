@@ -41,7 +41,7 @@ router.post("/api/upload", loginAuth, upload.any(), async (req, res) => {
         res.send({
           status: 200,
           message: "更新成功",
-          updateRes,
+          userImg: updateRes.userImg
         });
       } catch {
         res.send({
