@@ -8,6 +8,7 @@ const cors = require("cors");
 const upload = require("./router/upload");
 const image = require("./router/image");
 const home = require("./router/home");
+const comment = require("./router/comment");
 
 const port = 3456;
 const app = express();
@@ -22,6 +23,7 @@ app.use(videoLike);
 app.use(upload);
 app.use(image);
 app.use(home);
+app.use(comment);
 
 app.get("/api", (req, res) => {
   res.send("api server index");

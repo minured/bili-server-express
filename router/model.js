@@ -30,7 +30,7 @@ const videoSchema = new mongoose.Schema(
     categoryId: String,
     img: String,
     content: String,
-    upUsername: String,
+    upperId: String,
   },
   { timestamps: true }
 );
@@ -56,6 +56,14 @@ const categorySchema = new mongoose.Schema({
   name: String,
   id: Number,
 });
+const commentSchema = new mongoose.Schema({
+  videoId: String,
+  content: String,
+  date: String,
+  parentId: String,
+  username: String,
+  parentUser: String
+});
 
 // 创建文档集合 collections
 // 这边UserAuth为创建的集合名，mongodb会自动加s，变为UserAuths
@@ -64,9 +72,10 @@ const Video = mongoose.model("Video", videoSchema);
 const UserInfo = mongoose.model("UserInfo", userInfoSchema);
 const VideoLike = mongoose.model("VideoLike", videoLikeSchema);
 const Category = mongoose.model("Category", categorySchema);
+const Comment = mongoose.model("Comment", commentSchema);
 
 // 删除集合里的所有文档
 // UserAuth.db.dropCollection("userauths");
 // Video.db.dropCollection("videos");
 
-module.exports = { UserAuth, Video, UserInfo, VideoLike, Category };
+module.exports = { UserAuth, Video, UserInfo, VideoLike, Category, Comment };

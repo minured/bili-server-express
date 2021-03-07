@@ -18,8 +18,10 @@ router.get("/api/category/:categoryId", async (req, res) => {
     categoryId: req.params.categoryId,
   });
 
-  res.send(videos);
+  res.send({
+    status: 200,
+    videos,
+  });
 });
-
 
 module.exports = router;

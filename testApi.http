@@ -1,9 +1,9 @@
 @url = http://localhost:3456/api 
 # @url = http://47.115.88.159:8080/api
 @json = Content-Type: application/json
-@user1 = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNDFkMDFlMmJiYmM2MTY0ODBiZjI5YSIsImlhdCI6MTYxNDkyNTg5MH0.J4iBrlWCpj9NWdSq4-bczga8UzExKd9Y9q3k00Juev4
-@user2 = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNDFkMDJiMmJiYmM2MTY0ODBiZjI5YyIsImlhdCI6MTYxNDkzMDE1MH0.7UZY1ESD_TH81IgKJ0tUI7LbYqBNF8YpwmTZHZfdp8k
-
+@user1 = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNDQ3NjI3MGI2ODdjMzI0MGNiMTg2NyIsImlhdCI6MTYxNTEyNTUyMX0.GT4BTSKc5O_jVDlje81U_HWiC9QPkhrvzQKI2wN_FdY
+@user2 = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNDQ3ODU5OWZmYjUyNGIyNDA2ZWJmYSIsImlhdCI6MTYxNTEzMzQ2N30.54n2BM3CyVlHCWzMX06L5mPrhiolRJ3sP83OY2zgfAc
+@commentId = 604501b8b7f8c93b5cae4f31
 
 ### 接口测试
 GET {{url}}
@@ -23,8 +23,8 @@ POST {{url}}/login
 {{json}}
 
 {
-    "username": "user2",
-    "password": "123456"
+    "username": "222222",
+    "password": "222222"
 }
 
 ### 用户列表
@@ -80,6 +80,26 @@ get {{url}}/video/like
 
 ### 上传
 post {{url}}/upload/multer
+
+
+### 发表评论
+POST {{url}}/comment
+{{json}}
+{{user2}}
+
+{
+    "content": "哈哈哈哈",
+    "date": "03-05",
+    "parentId": "60450234b7f8c93b5cae4f3b",
+    "videoId": "bv0002"
+}
+
+### 获取评论
+GET {{url}}/comment/bv0002
+
+{
+
+}
 
 
 
