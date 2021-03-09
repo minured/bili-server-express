@@ -42,7 +42,7 @@ router.get("/api/video/:videoId", async (req, res) => {
 router.get("/api/commend", async (req, res) => {
   const commend = [];
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 8; i++) {
     const res = await Video.findOne({
       id: "bv000" + Math.floor(Math.random() * 299).toString(),
     });

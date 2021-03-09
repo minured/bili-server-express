@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { VideoLike, Video } = require("./model");
+const { VideoLike, Video, UserInfo } = require("./model");
 const router = express.Router();
 const { loginAuth } = require("../middleware");
 const { request } = require("express");
@@ -55,4 +55,63 @@ router.post("/api/video/like/:videoId", loginAuth, async (req, res) => {
   }
 });
 
+// 我的收藏列表
+router.get("/api/collections", loginAuth, async (req, res) => {
+  let result = [];
+  try {
+    const likeRecord = await VideoLike.find({
+      username: req.user.username,
+    });
+
+    // 查视频信息
+    for (let i = 0; i < likeRecord.length; i++) {
+      const video = await Video.findOne({
+        id: likeRecord[i].videoId,
+      });
+      // 查用户名
+      const userInfo = await UserInfo.findOne({
+        username: video.upperId,
+      });
+      result.push({
+        videoId: video.id,
+        name: video.name,
+        cover: video.img,
+        upper: userInfo.nickname,
+      });
+    }
+
+    res.send({
+      status: 200,
+      message: "查询成功",
+      result,
+    });
+  } catch {
+    res.send({
+      status: 400,
+      message: "查询失败",
+    });
+  }
+});
+
+// 删除收藏
+router.post("/api/removeCollection", loginAuth, async (req, res) => {
+  console.log(req.body.videoId);
+  console.log(req.user.username);
+  try {
+    const removeRes = await VideoLike.deleteOne({
+      username: req.user.username,
+      videoId: req.body.videoId,
+    });
+    res.send({
+      status: 200,
+      message: "取消收藏成功",
+      removeRes,
+    });
+  } catch {
+    res.send({
+      status: 400,
+      message: "取消收藏失败",
+    });
+  }
+});
 module.exports = router;

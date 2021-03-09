@@ -101,6 +101,10 @@ GET {{url}}/comment/bv0002
 
 }
 
+### 收藏列表
+get {{url}}/collections
+{{user2}}
+
 
 
 
