@@ -1,4 +1,4 @@
-@url = http://localhost:3456/api 
+@url = http://localhost:3001/api 
 # @url = http://47.115.88.159:8080/api
 @json = Content-Type: application/json
 @user1 = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNDQ3NjI3MGI2ODdjMzI0MGNiMTg2NyIsImlhdCI6MTYxNTEyNTUyMX0.GT4BTSKc5O_jVDlje81U_HWiC9QPkhrvzQKI2wN_FdY

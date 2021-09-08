@@ -29,8 +29,9 @@ router.post("/api/upload", loginAuth, upload.any(), async (req, res) => {
           },
           {
             $set: {
+              // 这里是前端访问的地址，因该用公网
               userImg:
-                "http://localhost:3456/api/image/" +
+                "http://159.75.122.22:3001/api/image/" +
                 filename.replace("uploads\\", ""),
             },
           },

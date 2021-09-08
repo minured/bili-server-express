@@ -2,3 +2,8 @@ private.js
 /node_modules
 /.vscode
 /uploads
+CentOS-Base.repo
+generateData.js
+myLog.log
+start3001.sh
+testApi.http

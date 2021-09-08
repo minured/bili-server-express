@@ -13,7 +13,7 @@ router.get("/api/user", loginAuth, async (req, res) => {
 });
 // 更新用户信息
 router.put("/api/user", loginAuth, async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   let userInfo;
   try {
     userInfo = await UserInfo.findOneAndUpdate(
@@ -42,5 +42,51 @@ router.put("/api/user", loginAuth, async (req, res) => {
     userInfo,
   });
 });
+
+// 用户列表
+router.get("/api/userlist", loginAuth, async (req, res) => {
+  try {
+    const userlist = await UserInfo.find()
+    res.send({
+      status: 200,
+      userlist
+    })
+  } catch {
+    res.send({
+      status: 400
+    })
+  }
+
+})
+
+// 更新用户
+router.post("/api/users/search", loginAuth, async (req, res) => {
+
+  try {
+    if (req.body.username) {
+      const result = await UserInfo.find({
+        username: req.body.username
+      })
+      res.send({
+        status: 200,
+        result
+      })
+    } else {
+      const result = await UserInfo.find({
+        nickname: req.body.nickname
+      })
+      res.send({
+        status: 200,
+        result
+      })
+    }
+
+  } catch {
+    res.send({
+      status: 400
+    })
+
+  }
+})
 
 module.exports = router;

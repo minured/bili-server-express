@@ -40,7 +40,11 @@ router.post("/api/register", async (req, res) => {
       userDesc: null,
     });
   } catch {
-    console.log(req.body.nickname);
+    console.log("创建UserInfo失败" + req.body.nickname);
+    res.send({
+      status: 400,
+      message: "创建UserInfo失败",
+    })
   }
 
   res.send({
@@ -53,6 +57,7 @@ router.post("/api/register", async (req, res) => {
 
 // 登录
 router.post("/api/login", async (req, res) => {
+  console.log("login");
   // 通过username从数据库找出信息
   const user = await UserAuth.findOne({
     username: req.body.username,
@@ -85,7 +90,7 @@ router.post("/api/login", async (req, res) => {
     },
     PRIVATE_KEY
   );
-  console.log(token);
+  // console.log(token);
 
   res.send({
     status: 200,
@@ -99,5 +104,50 @@ router.get("/api/users", async (req, res) => {
   const users = await UserAuth.find();
   res.send(users);
 });
+
+// 后台管理员登录
+router.post("/admin/login", async (req, res) => {
+  // 接入server酱,登陆通知
+  try {
+    // 管理员只有一个
+    const admin = await UserAuth.findOne({
+      username: "admin",
+    });
+    // bcrypt匹配密码
+    const isPasswordValid = bcryptjs.compareSync(
+      req.body.password,
+      admin.password
+    );
+    if (isPasswordValid) {
+      // 生成token
+      const token = jwt.sign(
+          {
+            id: admin._id,
+          },
+          PRIVATE_KEY
+      );
+      res.send({
+          status: 200,
+          message: "登陆成功",
+          username: admin.username,
+          token
+      })
+      return
+    } else {
+      console.log("手动触发异常");
+
+      
+      throw Error
+    }
+    
+  } catch {
+    res.send({
+      status: 400,
+      message: "用户名或密码错误",
+    });
+  }
+})
+
+
 
 module.exports = router;

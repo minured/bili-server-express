@@ -7811,7 +7811,6 @@ const videos = videos1.concat(
   videos14,
   videos15
 );
-console.log(videos.length);
 
 const users2 = [
   {
@@ -9249,18 +9248,18 @@ const category = [
 
 const { Video, UserInfo, Category } = require("./router/model");
 
-// 生成用户
-// for (let i = 0; i < users.length; i++) {
-//   UserInfo.create({
-//     gender: 0,
-//     username: "default_" + i.toString(),
-//     nickname: users[i].uname,
-//     userImg: users[i].face,
-//     userDesc: users[i].sign,
-//   }).then((res) => {
-//     console.log(res);
-//   });
-// }
+// 生成用户 up主
+for (let i = 0; i < users.length; i++) {
+  UserInfo.create({
+    gender: 0,
+    username: "default_" + i.toString(),
+    nickname: users[i].uname,
+    userImg: users[i].face,
+    userDesc: users[i].sign,
+  }).then((res) => {
+    console.log(res);
+  });
+}
 
 // 生成视频
 for (let i = 0; i < videos.length; i++) {
@@ -9279,11 +9278,11 @@ for (let i = 0; i < videos.length; i++) {
 }
 
 // 生成目录
-// for (let i = 0; i < category.length; i++) {
-//   Category.create({
-//     id: category[i]._id,
-//     name: category[i].title,
-//   }).then((res) => {
-//     console.log(res);
-//   });
-// }
+for (let i = 0; i < category.length; i++) {
+  Category.create({
+    id: category[i]._id,
+    name: category[i].title,
+  }).then((res) => {
+    console.log(res);
+  });
+}

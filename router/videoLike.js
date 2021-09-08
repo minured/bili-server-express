@@ -32,7 +32,7 @@ router.post("/api/video/like/:videoId", loginAuth, async (req, res) => {
     username: req.user.username,
     videoId: req.params.videoId,
   });
-  console.log(queryRes);
+  // console.log(queryRes);
 
   if (queryRes) {
     await VideoLike.deleteOne({
@@ -95,8 +95,8 @@ router.get("/api/collections", loginAuth, async (req, res) => {
 
 // 删除收藏
 router.post("/api/removeCollection", loginAuth, async (req, res) => {
-  console.log(req.body.videoId);
-  console.log(req.user.username);
+  // console.log(req.body.videoId);
+  // console.log(req.user.username);
   try {
     const removeRes = await VideoLike.deleteOne({
       username: req.user.username,

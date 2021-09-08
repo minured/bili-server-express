@@ -10,7 +10,7 @@ router.get("/api/videos", async (req, res) => {
 
 // 添加视频
 router.post("/api/video", async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   video = await Video.create({
     id: req.body.id,
     introduction: req.body.introduction,
