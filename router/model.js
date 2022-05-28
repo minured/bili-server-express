@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-// mongoose.set('useFindAndModify', false)
+const { MONGODB } = require("../private.js");
 
 // 创建数据库库bilibili
-mongoose.connect("mongodb://localhost:27017/bilibili", {
+mongoose.connect(MONGODB, {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
