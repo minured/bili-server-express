@@ -28,7 +28,7 @@ app.use(home);
 app.use(comment);
 
 app.get("/api", (req, res) => {
-  res.send("api server index");
+  res.send("Welcome to awesome bili server!");
 });
 
 app.listen(port, () => {

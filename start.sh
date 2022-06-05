@@ -1,0 +1,1 @@
+pm2 start app.js > myLog.log 2>&1 &
