@@ -31,7 +31,7 @@ router.post("/api/upload", loginAuth, upload.any(), async (req, res) => {
             $set: {
               // 这里是前端访问的地址，因该用公网
               userImg:
-                "http://159.75.122.22:3001/api/image/" +
+                "http://hk.yeminyu.tk/api/bili/image/" +
                 filename.replace("uploads\\", ""),
             },
           },
